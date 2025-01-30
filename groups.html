@@ -1,0 +1,116 @@
+<div class="groups-container">
+    <div class="groups-header">
+        <h2>Группы аккаунтов</h2>
+        <button onclick="showCreateGroupModal()" class="create-group-btn">
+            <i class="fas fa-plus"></i> Создать группу
+        </button>
+    </div>
+    <div class="groups-list">
+        <!-- Группы будут добавляться сюда динамически -->
+    </div>
+</div>
+
+<!-- Шаблон для группы -->
+<template id="group-template">
+    <div class="group-block">
+        <div class="group-header">
+            <h3></h3>
+            <div class="group-buttons">
+                <button class="add-account-btn" onclick="showAddAccountModal(this.closest('.group-block').dataset.groupName)">
+                    <i class="fas fa-user-plus"></i>
+                </button>
+                <button class="clean-accounts-btn">
+                    <i class="fas fa-broom"></i>
+                </button>
+                <button class="wake-accounts-btn">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button class="delete-group-btn">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </div>
+        </div>
+        <div class="accounts-list">
+            <!-- Аккаунты будут добавляться сюда динамически -->
+        </div>
+    </div>
+</template>
+
+<!-- Модальное окно добавления аккаунта -->
+<div id="addAccountModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Добавление аккаунта в группу <span id="currentGroupName"></span></h2>
+        <div class="add-method-buttons">
+            <button onclick="showAuthForm()">Авторизация</button>
+            <button onclick="showFileUpload()">Session + JSON</button>
+        </div>
+    </div>
+</div>
+
+<!-- Форма авторизации -->
+<div id="authForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Авторизация аккаунта</h2>
+        <form id="telegramAuthForm">
+            <input type="text" name="accountName" placeholder="Имя аккаунта" required>
+            <input type="text" name="phoneNumber" placeholder="Номер телефона" required>
+            <input type="password" name="password" placeholder="Пароль" required>
+            <input type="text" name="proxyUrl" placeholder="Ссылка на прокси (socks5://user:pass@host:port)">
+            <select name="accountType" required>
+                <option value="admin_acc">Админ аккаунт</option>
+                <option value="actors_accs">Рабочий аккаунт</option>
+                <option value="free_accs">Свободный аккаунт</option>
+            </select>
+            <button type="submit">Отправить код</button>
+        </form>
+    </div>
+</div>
+
+<!-- Форма загрузки файлов -->
+<div id="fileUploadForm" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Загрузка Session + JSON</h2>
+        <form id="fileForm" class="styled-form">
+            <div class="form-group">
+                <label>Имя аккаунта (обязательно)</label>
+                <input type="text" name="accountName" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Session файл</label>
+                <input type="file" name="sessionFile" accept=".session" required>
+            </div>
+            
+            <div class="form-group">
+                <label>Прокси (формат: socks5://user:pass@host:port)</label>
+                <input type="text" name="proxyUrl" placeholder="socks5://username:password@host:port">
+            </div>
+            
+            <div class="form-group">
+                <label>Тип аккаунта</label>
+                <select name="accountType" required>
+                    <option value="admin_acc">Админ аккаунт</option>
+                    <option value="actors_accs">Рабочий аккаунт</option>
+                    <option value="free_accs">Свободный аккаунт</option>
+                </select>
+            </div>
+            
+            <button type="submit" class="submit-btn">Импортировать</button>
+        </form>
+    </div>
+</div>
+
+<!-- Добавляем модальное окно для ввода кода -->
+<div id="codeInputModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Введите код подтверждения</h2>
+        <form id="codeInputForm">
+            <input type="text" name="code" placeholder="Код из Telegram" required>
+            <button type="submit">Подтвердить</button>
+        </form>
+    </div>
+</div>

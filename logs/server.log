@@ -1,0 +1,290 @@
+2025-01-30 03:44:30,003 [INFO] Запуск сервера Flask
+ * Serving Flask app 'server'
+ * Debug mode: on
+2025-01-30 03:44:30,119 [INFO] [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:8000
+2025-01-30 03:44:30,120 [INFO] [33mPress CTRL+C to quit[0m
+2025-01-30 03:44:30,211 [INFO]  * Restarting with watchdog (windowsapi)
+2025-01-30 03:44:31,558 [INFO] Запуск сервера Flask
+2025-01-30 03:44:31,573 [WARNING]  * Debugger is active!
+2025-01-30 03:44:31,575 [INFO]  * Debugger PIN: 629-292-791
+2025-01-30 03:44:31,803 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:44:31,805 [DEBUG] Body: b''
+2025-01-30 03:44:31,805 [DEBUG] URL: http://localhost:8000/get_groups
+2025-01-30 03:44:31,806 [DEBUG] Method: GET
+2025-01-30 03:44:31,807 [DEBUG] Response Status: 200 OK
+2025-01-30 03:44:31,807 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:44:31,809 [INFO] 127.0.0.1 - - [30/Jan/2025 03:44:31] "GET /get_groups HTTP/1.1" 200 -
+2025-01-30 03:44:37,074 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Content-Length: 14
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Content-Type: application/json
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:44:37,075 [DEBUG] Body: b'{"name":"123"}'
+2025-01-30 03:44:37,075 [DEBUG] URL: http://localhost:8000/create_group
+2025-01-30 03:44:37,075 [DEBUG] Method: POST
+2025-01-30 03:44:37,080 [DEBUG] Response Status: 200 OK
+2025-01-30 03:44:37,080 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 22
+
+
+2025-01-30 03:44:37,080 [INFO] 127.0.0.1 - - [30/Jan/2025 03:44:37] "POST /create_group HTTP/1.1" 200 -
+2025-01-30 03:44:38,841 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:44:38,842 [DEBUG] Body: b''
+2025-01-30 03:44:38,842 [DEBUG] URL: http://localhost:8000/get_groups
+2025-01-30 03:44:38,843 [DEBUG] Method: GET
+2025-01-30 03:44:38,845 [DEBUG] Response Status: 200 OK
+2025-01-30 03:44:38,845 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 140
+
+
+2025-01-30 03:44:38,846 [INFO] 127.0.0.1 - - [30/Jan/2025 03:44:38] "GET /get_groups HTTP/1.1" 200 -
+2025-01-30 03:45:11,823 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:45:11,823 [DEBUG] Body: b''
+2025-01-30 03:45:11,824 [DEBUG] URL: http://localhost:8000/get_scenarios
+2025-01-30 03:45:11,824 [DEBUG] Method: GET
+2025-01-30 03:45:11,824 [DEBUG] Response Status: 200 OK
+2025-01-30 03:45:11,824 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:45:11,824 [INFO] 127.0.0.1 - - [30/Jan/2025 03:45:11] "GET /get_scenarios HTTP/1.1" 200 -
+2025-01-30 03:51:30,576 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:51:30,576 [DEBUG] Body: b''
+2025-01-30 03:51:30,576 [DEBUG] URL: http://localhost:8000/get_groups
+2025-01-30 03:51:30,576 [DEBUG] Method: GET
+2025-01-30 03:51:30,577 [DEBUG] Response Status: 200 OK
+2025-01-30 03:51:30,577 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 140
+
+
+2025-01-30 03:51:30,577 [INFO] 127.0.0.1 - - [30/Jan/2025 03:51:30] "GET /get_groups HTTP/1.1" 200 -
+2025-01-30 03:51:32,871 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Content-Length: 14
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Content-Type: application/json
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:51:32,871 [DEBUG] Body: b'{"name":"123"}'
+2025-01-30 03:51:32,871 [DEBUG] URL: http://localhost:8000/delete_group
+2025-01-30 03:51:32,871 [DEBUG] Method: POST
+2025-01-30 03:51:32,873 [DEBUG] Response Status: 200 OK
+2025-01-30 03:51:32,873 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 22
+
+
+2025-01-30 03:51:32,873 [INFO] 127.0.0.1 - - [30/Jan/2025 03:51:32] "POST /delete_group HTTP/1.1" 200 -
+2025-01-30 03:51:33,180 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:51:33,180 [DEBUG] Body: b''
+2025-01-30 03:51:33,181 [DEBUG] URL: http://localhost:8000/get_groups
+2025-01-30 03:51:33,181 [DEBUG] Method: GET
+2025-01-30 03:51:33,181 [DEBUG] Response Status: 200 OK
+2025-01-30 03:51:33,181 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:51:33,181 [INFO] 127.0.0.1 - - [30/Jan/2025 03:51:33] "GET /get_groups HTTP/1.1" 200 -
+2025-01-30 03:51:34,999 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:51:34,999 [DEBUG] Body: b''
+2025-01-30 03:51:35,000 [DEBUG] URL: http://localhost:8000/get_scenarios
+2025-01-30 03:51:35,000 [DEBUG] Method: GET
+2025-01-30 03:51:35,000 [DEBUG] Response Status: 200 OK
+2025-01-30 03:51:35,000 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:51:35,000 [INFO] 127.0.0.1 - - [30/Jan/2025 03:51:35] "GET /get_scenarios HTTP/1.1" 200 -
+2025-01-30 03:52:07,525 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:52:07,525 [DEBUG] Body: b''
+2025-01-30 03:52:07,525 [DEBUG] URL: http://localhost:8000/get_scenarios
+2025-01-30 03:52:07,525 [DEBUG] Method: GET
+2025-01-30 03:52:07,525 [DEBUG] Response Status: 200 OK
+2025-01-30 03:52:07,525 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:52:07,526 [INFO] 127.0.0.1 - - [30/Jan/2025 03:52:07] "GET /get_scenarios HTTP/1.1" 200 -
+2025-01-30 03:52:59,803 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:52:59,804 [DEBUG] Body: b''
+2025-01-30 03:52:59,804 [DEBUG] URL: http://localhost:8000/get_scenarios
+2025-01-30 03:52:59,804 [DEBUG] Method: GET
+2025-01-30 03:52:59,804 [DEBUG] Response Status: 200 OK
+2025-01-30 03:52:59,804 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:52:59,805 [INFO] 127.0.0.1 - - [30/Jan/2025 03:52:59] "GET /get_scenarios HTTP/1.1" 200 -
+2025-01-30 03:54:34,132 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:54:34,133 [DEBUG] Body: b''
+2025-01-30 03:54:34,133 [DEBUG] URL: http://localhost:8000/get_scenarios
+2025-01-30 03:54:34,133 [DEBUG] Method: GET
+2025-01-30 03:54:34,133 [DEBUG] Response Status: 200 OK
+2025-01-30 03:54:34,133 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:54:34,133 [INFO] 127.0.0.1 - - [30/Jan/2025 03:54:34] "GET /get_scenarios HTTP/1.1" 200 -
+2025-01-30 03:54:40,052 [DEBUG] Headers: Host: localhost:8000
+Connection: keep-alive
+Sec-Ch-Ua-Platform: "Windows"
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) teatr/1.0.0 Chrome/130.0.6723.137 Electron/33.2.1 Safari/537.36
+Sec-Ch-Ua: "Not?A_Brand";v="99", "Chromium";v="130"
+Sec-Ch-Ua-Mobile: ?0
+Accept: */*
+Sec-Fetch-Site: cross-site
+Sec-Fetch-Mode: cors
+Sec-Fetch-Dest: empty
+Accept-Encoding: gzip, deflate, br, zstd
+Accept-Language: en-GB
+
+
+2025-01-30 03:54:40,053 [DEBUG] Body: b''
+2025-01-30 03:54:40,053 [DEBUG] URL: http://localhost:8000/get_groups
+2025-01-30 03:54:40,053 [DEBUG] Method: GET
+2025-01-30 03:54:40,053 [DEBUG] Response Status: 200 OK
+2025-01-30 03:54:40,053 [DEBUG] Response Headers: Content-Type: application/json
+Content-Length: 3
+
+
+2025-01-30 03:54:40,053 [INFO] 127.0.0.1 - - [30/Jan/2025 03:54:40] "GET /get_groups HTTP/1.1" 200 -

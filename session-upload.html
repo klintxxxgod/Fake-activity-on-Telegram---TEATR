@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Загрузка Session + JSON</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 2px solid #ff4d00;
+            color: #ff4d00;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: #ff4d00;
+            color: #fff;
+        }
+
+        .upload-form {
+            background: #242424;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #ff4d00;
+        }
+
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+        }
+
+        .submit-btn {
+            background: #ff4d00;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #ff6a00;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            background: #333;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        input[type="text"]::placeholder {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="account-groups.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Вернуться к группам</span>
+            </a>
+        </div>
+
+        <form id="fileForm" class="upload-form" enctype="multipart/form-data">
+            <h2>Загрузка Session + JSON</h2>
+            
+            <div class="form-group">
+                <label for="accountName">Имя аккаунта:</label>
+                <input type="text" id="accountName" name="accountName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="accountType">Тип аккаунта:</label>
+                <select id="accountType" name="accountType" required>
+                    <option value="admin_acc">Админ аккаунт</option>
+                    <option value="free_accs">Свободный аккаунт</option>
+                    <option value="actors_accs">Рабочий аккаунт</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="proxyUrl">Прокси (опционально):</label>
+                <input type="text" id="proxyUrl" name="proxyUrl" 
+                       placeholder="socks5://user:pass@host:port">
+            </div>
+
+            <div class="form-group">
+                <label for="sessionFile">Файл Session:</label>
+                <input type="file" id="sessionFile" name="sessionFile" accept=".session" required>
+            </div>
+
+            <div class="form-group">
+                <label for="jsonFile">Файл JSON:</label>
+                <input type="file" id="jsonFile" name="jsonFile" accept=".json" required>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-upload"></i>
+                Загрузить файлы
+            </button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('fileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const currentGroup = sessionStorage.getItem('currentGroup');
+            
+            if (!currentGroup) {
+                alert('Ошибка: группа не выбрана');
+                return;
+            }
+            
+            formData.append('groupName', currentGroup);
+            
+            try {
+                const response = await fetch('http://localhost:5000/import_session', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Аккаунт успешно импортирован!');
+                    window.location.href = 'account-groups.html';
+                } else {
+                    throw new Error(result.error || 'Ошибка при импорте');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ошибка при импорте аккаунта: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html> 

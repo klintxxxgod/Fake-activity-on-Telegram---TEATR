@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Группы аккаунтов</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 2px solid #ff4d00;
+            color: #ff4d00;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-btn:hover {
+            background: #ff4d00;
+            color: #fff;
+        }
+
+        .groups-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .group-card {
+            background: #242424;
+            border: 2px solid #ff4d00;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 77, 0, 0.2);
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .group-name {
+            font-size: 1.5em;
+            color: #ff4d00;
+        }
+
+        .group-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 77, 0, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 1.5em;
+            color: #ff4d00;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #888;
+        }
+
+        .group-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .management-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            flex: 1;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .add-account-btn {
+            background: transparent;
+            border: 2px solid #ff4d00;
+            color: #ff4d00;
+            width: 100%;
+            padding: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .add-account-btn:hover {
+            background: #ff4d00;
+            color: transparent;
+            text-shadow: 0 0 0 #fff;
+        }
+
+        .add-account-btn i {
+            transition: all 0.3s ease;
+        }
+
+        .add-account-btn:hover i {
+            color: #fff;
+        }
+
+        .delete-btn {
+            background: #ff4d00;
+            color: #fff;
+            border: none;
+        }
+
+        .clean-btn {
+            background: #4d9fff;
+            color: #fff;
+            border: none;
+        }
+
+        .wake-btn {
+            background: #4dff4d;
+            color: #000;
+            border: none;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.2);
+        }
+
+        .add-group-btn {
+            background: rgba(255, 77, 0, 0.2);
+            border: 2px solid #ff4d00;
+            color: #ff4d00;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-group-btn:hover {
+            background: #ff4d00;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Стили для модального окна */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #242424;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            color: #ff4d00;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ff4d00;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .submit-btn {
+            background: #ff4d00;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: #cc3d00;
+        }
+
+        .code-input-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .code-digit {
+            width: 45px;
+            height: 45px;
+            font-size: 24px;
+            text-align: center;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            background: #242424;
+            color: white;
+        }
+
+        .code-digit:focus {
+            outline: none;
+            border-color: #ff6b00;
+            box-shadow: 0 0 5px rgba(255, 69, 0, 0.5);
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .primary-button, .secondary-button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .primary-button {
+            background: #ff4d00;
+            color: white;
+            border: none;
+        }
+
+        .secondary-button {
+            background: none;
+            color: #ff4d00;
+            border: 2px solid #ff4d00;
+        }
+
+        .primary-button:hover {
+            background: #ff6b00;
+        }
+
+        .secondary-button:hover {
+            background: #ff4d00;
+            color: white;
+        }
+
+        h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #888;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #fileUploadForm .modal-header {
+            position: relative;
+        }
+
+        /* Добавляем новый стиль для прозрачной кнопки закрытия */
+        .transparent-close {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        /* Изменяем стиль для символа крестика */
+        #fileUploadForm .close {
+            color: #ff4d00;
+            font-size: 28px;
+            font-weight: bold;
+            pointer-events: none; /* Отключаем события мыши для самого символа */
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <button class="back-btn" onclick="window.location.href='index.html'">
+                <i class="fas fa-arrow-left"></i>
+                Вернуться в главное меню
+            </button>
+            <button class="add-group-btn" onclick="showCreateGroupModal()">
+                <i class="fas fa-plus"></i>
+                Создать группу аккаунтов
+            </button>
+        </div>
+        <div class="groups-grid" id="groupsList">
+            <!-- Группы будут добавлены через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Модальное окно создания группы -->
+    <div id="createGroupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Создать группу аккаунтов</h2>
+                <span class="close" onclick="hideCreateGroupModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="groupName">Название группы:</label>
+                    <input type="text" id="groupName" placeholder="Введите название группы">
+                </div>
+                <button class="submit-btn" onclick="createGroup()">Создать группу</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно выбора способа добавления аккаунта -->
+    <div id="addAccountModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Добавление аккаунта в группу <span id="currentGroupName"></span></h2>
+                <span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span>
+            </div>
+            <div class="modal-body">
+                <button class="submit-btn" onclick="showAuthForm()" style="margin-bottom: 10px;">
+                    <i class="fas fa-key"></i> Авторизация
+                </button>
+                <button onclick="window.location.href='session-upload.html'" class="add-account-btn">
+                    <i class="fas fa-file-upload"></i> Добавить по Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Форма авторизации -->
+    <div id="authForm" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Авторизация аккаунта</h2>
+                <span class="close" onclick="this.closest('.modal').style.display='none'">&times;</span>
+            </div>
+            <form id="telegramAuthForm">
+                <div class="form-group">
+                    <input type="text" name="accountName" placeholder="Имя аккаунта" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" name="phoneNumber" placeholder="Номер телефона" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" name="password" placeholder="Пароль (если есть)">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="proxyUrl" placeholder="Ссылка на прокси (необязательно)">
+                </div>
+                <div class="form-group">
+                    <label>Устройство:</label>
+                    <select name="deviceModel" required>
+                        <option value="random">Случайное устройство</option>
+                        
+                        <optgroup label="Apple">
+                            <option value="iPhone 14 Pro Max">iPhone 14 Pro Max</option>
+                            <option value="iPhone 14 Pro">iPhone 14 Pro</option>
+                            <option value="iPhone 13 Pro Max">iPhone 13 Pro Max</option>
+                            <option value="iPhone 13">iPhone 13</option>
+                            <option value="iPad Pro 12.9">iPad Pro 12.9</option>
+                            <option value="MacBook Pro 16">MacBook Pro 16</option>
+                        </optgroup>
+                        
+                        <optgroup label="Samsung">
+                            <option value="Galaxy S23 Ultra">Galaxy S23 Ultra</option>
+                            <option value="Galaxy S23+">Galaxy S23+</option>
+                            <option value="Galaxy Z Fold4">Galaxy Z Fold4</option>
+                            <option value="Galaxy Tab S8 Ultra">Galaxy Tab S8 Ultra</option>
+                        </optgroup>
+                        
+                        <optgroup label="Google">
+                            <option value="Pixel 7 Pro">Pixel 7 Pro</option>
+                            <option value="Pixel 7">Pixel 7</option>
+                        </optgroup>
+                        
+                        <optgroup label="Xiaomi">
+                            <option value="Mi 13 Ultra">Mi 13 Ultra</option>
+                            <option value="POCO F5 Pro">POCO F5 Pro</option>
+                        </optgroup>
+                        
+                        <optgroup label="ПК">
+                            <option value="Gaming Desktop">Gaming Desktop</option>
+                            <option value="Custom PC">Custom PC</option>
+                            <option value="Workstation PC">Workstation PC</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Система:</label>
+                    <select name="systemVersion" required>
+                        <option value="random">Случайная система</option>
+                        
+                        <optgroup label="Android">
+                            <option value="Android 13">Android 13</option>
+                            <option value="Android 12">Android 12</option>
+                            <option value="Android 11">Android 11</option>
+                        </optgroup>
+                        
+                        <optgroup label="iOS">
+                            <option value="iOS 16.5">iOS 16.5</option>
+                            <option value="iOS 16.4">iOS 16.4</option>
+                            <option value="iOS 16.3">iOS 16.3</option>
+                        </optgroup>
+                        
+                        <optgroup label="Windows">
+                            <option value="Windows 11">Windows 11</option>
+                            <option value="Windows 10">Windows 10</option>
+                        </optgroup>
+                        
+                        <optgroup label="macOS">
+                            <option value="macOS 13 Ventura">macOS 13 Ventura</option>
+                            <option value="macOS 12 Monterey">macOS 12 Monterey</option>
+                        </optgroup>
+                        
+                        <optgroup label="Linux">
+                            <option value="Ubuntu 22.04 LTS">Ubuntu 22.04 LTS</option>
+                            <option value="Debian 11">Debian 11</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <select name="accountType" required>
+                        <option value="admin_acc">Админ аккаунт</option>
+                        <option value="free_accs">Свободный аккаунт</option>
+                        <option value="actors_accs">Рабочий аккаунт</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Авторизовать</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Форма загрузки файлов -->
+    <div id="fileUploadForm" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Загрузка Session + JSON</h2>
+                <div class="close-button-wrapper">
+                    <button class="transparent-close" type="button">
+                        <span class="close">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <form id="fileForm" class="styled-form" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>Session файл:</label>
+                    <input type="file" name="sessionFile" accept=".session" required>
+                </div>
+                <div class="form-group">
+                    <label>JSON файл:</label>
+                    <input type="file" name="jsonFile" accept=".json" required>
+                </div>
+                <div class="form-group">
+                    <label>Имя аккаунта:</label>
+                    <input type="text" name="accountName" required>
+                </div>
+                <div class="form-group">
+                    <label>Прокси (опционально):</label>
+                    <input type="text" name="proxyUrl" placeholder="socks5://user:pass@host:port">
+                </div>
+                <div class="form-group">
+                    <label>Тип аккаунта:</label>
+                    <select name="accountType" required>
+                        <option value="admin_acc">Админ аккаунт</option>
+                        <option value="actors_accs">Рабочий аккаунт</option>
+                        <option value="free_accs">Свободный аккаунт</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Импортировать</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно ввода кода -->
+    <div id="codeInputModal" class="modal">
+        <div class="modal-content">
+            <h2>Введите код подтверждения</h2>
+            <p>Код был отправлен в Telegram</p>
+            <div class="code-input-container">
+                <input type="text" maxlength="1" class="code-digit" />
+                <input type="text" maxlength="1" class="code-digit" />
+                <input type="text" maxlength="1" class="code-digit" />
+                <input type="text" maxlength="1" class="code-digit" />
+                <input type="text" maxlength="1" class="code-digit" />
+            </div>
+            <div class="modal-buttons">
+                <button id="submitCode" class="primary-button">Подтвердить</button>
+                <button id="cancelCode" class="secondary-button">Отмена</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const AUTH_API_URL = 'http://localhost:5000';  // Сервер авторизации
+        const API_URL = 'http://localhost:8000';       // Основной сервер
+
+        function showCreateGroupModal() {
+            document.getElementById('createGroupModal').style.display = 'block';
+        }
+
+        function hideCreateGroupModal() {
+            document.getElementById('createGroupModal').style.display = 'none';
+        }
+
+        async function createGroup() {
+            const groupName = document.getElementById('groupName').value.trim();
+            
+            if (!groupName) {
+                alert('Введите название группы');
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/create_group`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name: groupName }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Ошибка при создании группы');
+                }
+
+                alert('Группа успешно создана!');
+                hideCreateGroupModal();
+                loadGroups();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        async function loadGroups() {
+            try {
+                const response = await fetch(`${API_URL}/get_groups`);
+                const groups = await response.json();
+                
+                const groupsList = document.getElementById('groupsList');
+                groupsList.innerHTML = '';
+
+                groups.forEach(group => {
+                    const card = createGroupCard(group.name, group.stats);
+                    groupsList.appendChild(card);
+                });
+            } catch (error) {
+                console.error('Ошибка при загрузке групп:', error);
+            }
+        }
+
+        async function deleteGroup(name) {
+            if (confirm(`Вы действительно хотите удалить группу "${name}"?`)) {
+                try {
+                    const response = await fetch(`${API_URL}/delete_group`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Ошибка при удалении группы');
+                    }
+
+                    loadGroups();
+                } catch (error) {
+                    alert(error.message);
+                }
+            }
+        }
+
+        async function cleanDeadAccounts(name) {
+            try {
+                const response = await fetch(`${API_URL}/clean_dead_accounts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Ошибка при очистке мертвых аккаунтов');
+                }
+
+                loadGroups();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        async function wakeSleepingAccounts(name) {
+            try {
+                const response = await fetch(`${API_URL}/wake_sleeping_accounts`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ name }),
+                });
+
+                if (!response.ok) {
+                    throw new Error('Ошибка при пробуждении аккаунтов');
+                }
+
+                loadGroups();
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+
+        function createGroupCard(name, stats) {
+            const card = document.createElement('div');
+            card.className = 'group-card';
+            card.innerHTML = `
+                <div class="group-header">
+                    <h3 class="group-name">${name}</h3>
+                </div>
+                <div class="group-stats">
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.actors || 0}</div>
+                        <div class="stat-label">Рабочие аккаунты</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.sleep || 0}</div>
+                        <div class="stat-label">Спящие аккаунты</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.dead || 0}</div>
+                        <div class="stat-label">Мертвые аккаунты</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value">${stats.free || 0}</div>
+                        <div class="stat-label">Свободные аккаунты</div>
+                    </div>
+                </div>
+                <div class="group-actions">
+                    <button class="action-btn add-account-btn" onclick="showAddAccountModal('${name}')">
+                        <i class="fas fa-plus"></i>
+                        Добавить аккаунт
+                    </button>
+                    <div class="management-buttons">
+                        <button class="action-btn delete-btn" onclick="deleteGroup('${name}')">
+                            <i class="fas fa-trash"></i>
+                            Удалить группу
+                        </button>
+                        <button class="action-btn clean-btn" onclick="cleanDeadAccounts('${name}')">
+                            <i class="fas fa-broom"></i>
+                            Очистить мертвые
+                        </button>
+                        <button class="action-btn wake-btn" onclick="wakeSleepingAccounts('${name}')">
+                            <i class="fas fa-bell"></i>
+                            Пробудить спящие
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        function showAddAccountModal(groupName) {
+            document.getElementById('currentGroupName').textContent = groupName;
+            document.getElementById('addAccountModal').style.display = 'block';
+            sessionStorage.setItem('currentGroup', groupName);
+        }
+
+        function showAuthForm() {
+            document.getElementById('addAccountModal').style.display = 'none';
+            document.getElementById('authForm').style.display = 'block';
+        }
+
+        function showFileUpload() {
+            document.getElementById('addAccountModal').style.display = 'none';
+            document.getElementById('fileUploadForm').style.display = 'block';
+        }
+
+        // Обработка формы авторизации
+        document.getElementById('telegramAuthForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const currentGroup = sessionStorage.getItem('currentGroup');
+            
+            const data = {
+                accountName: formData.get('accountName'),
+                phoneNumber: formData.get('phoneNumber'),
+                password: formData.get('password'),  // Добавляем пароль
+                proxyUrl: formData.get('proxyUrl'),
+                accountType: formData.get('accountType'),
+                deviceModel: formData.get('deviceModel'),
+                systemVersion: formData.get('systemVersion'),
+                groupName: currentGroup  // Добавляем имя группы
+            };
+
+            try {
+                console.log('Отправка запроса авторизации...', data);
+                const response = await fetch(`${AUTH_API_URL}/auth_account`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                console.log('Результат авторизации:', result);
+                
+                if (result.success && result.needCode) {
+                    try {
+                        // Показываем модальное окно для ввода кода
+                        const code = await showCodeInputModal();
+                        console.log('Получен код:', code);
+                        
+                        const completeData = {
+                            ...data,
+                            code: code,
+                            phoneHash: result.phoneHash,
+                            client: result.client
+                        };
+
+                        const completeResponse = await fetch(`${AUTH_API_URL}/complete_auth`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(completeData)
+                        });
+
+                        const completeResult = await completeResponse.json();
+                        console.log('Результат подтверждения:', completeResult);
+                        
+                        if (completeResult.success) {
+                            alert('Аккаунт успешно добавлен!');
+                            document.getElementById('authForm').style.display = 'none';
+                            loadGroups();
+                        } else if (completeResult.need2FA) {
+                            const password = prompt('Введите пароль двухфакторной аутентификации:');
+                            if (password) {
+                                // ... обработка 2FA ...
+                            }
+                        } else {
+                            throw new Error(completeResult.error || 'Ошибка при завершении авторизации');
+                        }
+                    } catch (error) {
+                        if (error.message === 'Отменено пользователем') {
+                            console.log('Ввод кода отменен пользователем');
+                        } else {
+                            throw error;
+                        }
+                    }
+                } else {
+                    throw new Error(result.error || 'Неизвестная ошибка при авторизации');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ошибка при авторизации: ' + error.message);
+            }
+        });
+
+        // Обработка загрузки файлов
+        document.getElementById('fileForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            console.log('Form submitted'); // Отладочный вывод
+            
+            const formData = new FormData(e.target);
+            const currentGroup = sessionStorage.getItem('currentGroup');
+            
+            if (!currentGroup) {
+                alert('Ошибка: группа не выбрана');
+                return;
+            }
+            
+            formData.append('groupName', currentGroup);
+            
+            try {
+                console.log('Sending request to server...'); // Отладочный вывод
+                const response = await fetch('http://localhost:5000/import_session', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                console.log('Response received:', response); // Отладочный вывод
+                const result = await response.json();
+                
+                if (result.success) {
+                    alert('Аккаунт успешно импортирован!');
+                    document.getElementById('fileUploadForm').style.display = 'none';
+                    loadGroups();  // Перезагружаем список групп
+                } else {
+                    throw new Error(result.error || 'Ошибка при импорте');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Ошибка при импорте аккаунта: ' + error.message);
+            }
+        });
+
+        // Загружаем группы при загрузке страницы
+        document.addEventListener('DOMContentLoaded', loadGroups);
+
+        // Закрываем модальное окно при клике вне его
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('createGroupModal')) {
+                hideCreateGroupModal();
+            }
+        }
+
+        // Обработка ввода кода
+        function setupCodeInput() {
+            const inputs = document.querySelectorAll('.code-digit');
+            
+            inputs.forEach((input, index) => {
+                input.addEventListener('keyup', (e) => {
+                    if (e.key >= 0 && e.key <= 9) {
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
+                    } else if (e.key === 'Backspace') {
+                        if (index > 0) {
+                            inputs[index - 1].focus();
+                        }
+                    }
+                });
+            });
+        }
+
+        // Функция для показа модального окна и получения кода
+        function showCodeInputModal() {
+            return new Promise((resolve, reject) => {
+                const modal = document.getElementById('codeInputModal');
+                const inputs = document.querySelectorAll('.code-digit');
+                const submitBtn = document.getElementById('submitCode');
+                const cancelBtn = document.getElementById('cancelCode');
+
+                modal.style.display = 'block';
+                inputs[0].focus();
+
+                submitBtn.onclick = () => {
+                    const code = Array.from(inputs).map(input => input.value).join('');
+                    if (code.length === 5) {
+                        modal.style.display = 'none';
+                        // Очищаем инпуты
+                        inputs.forEach(input => input.value = '');
+                        resolve(code);
+                    }
+                };
+
+                cancelBtn.onclick = () => {
+                    modal.style.display = 'none';
+                    // Очищаем инпуты
+                    inputs.forEach(input => input.value = '');
+                    reject(new Error('Отменено пользователем'));
+                };
+            });
+        }
+
+        // Инициализация обработчиков ввода кода
+        setupCodeInput();
+    </script>
+</body>
+</html> 

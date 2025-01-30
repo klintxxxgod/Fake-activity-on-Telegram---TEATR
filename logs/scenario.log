@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\owner\OneDrive\Рабочий стол\Teatr\scripts\scenario_manager.py", line 6, in <module>
+    from fastapi import FastAPI, HTTPException
+ModuleNotFoundError: No module named 'fastapi'

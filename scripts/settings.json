@@ -1,0 +1,10 @@
+{
+    "delay_between_actions": 2,
+    "max_retries": 3,
+    "flood_wait_multiplier": 1.5,
+    "auto_replace_accounts": true,
+    "check_sleeping_accounts_interval": 3600,
+    "max_spam_block_duration": 3600,
+    "chat_join_delay": 30,
+    "cleanup_mode": "instant"
+} 

@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\owner\OneDrive\Рабочий стол\Teatr\app_server.py", line 2, in <module>
+    from quart_cors import cors
+ModuleNotFoundError: No module named 'quart_cors'

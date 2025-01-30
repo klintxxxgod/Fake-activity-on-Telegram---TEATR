@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сценарии - Teatr App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .scenarios-list {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .scenario-block {
+            background: #242424;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .scenario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .scenario-header h3 {
+            margin: 0;
+            color: #ff4d00;
+        }
+
+        .scenario-stats {
+            color: #888;
+        }
+
+        .scenario-stats span {
+            margin-left: 15px;
+        }
+
+        .scenario-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .action-list {
+            color: #888;
+            line-height: 1.5;
+        }
+
+        .scenario-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .edit-btn, .delete-btn {
+            background: none;
+            border: 1px solid #ff4d00;
+            color: #ff4d00;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .delete-btn {
+            border-color: #ff4444;
+            color: #ff4444;
+        }
+
+        .edit-btn:hover {
+            background: #ff4d00;
+            color: #fff;
+        }
+
+        .delete-btn:hover {
+            background: #ff4444;
+            color: #fff;
+        }
+
+        .toolbar {
+            margin-bottom: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .back-btn {
+            background: none;
+            border: 2px solid #ff4d00;
+            color: #ff4d00;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .create-btn {
+            background: #ff4d00;
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .no-scenarios, .error {
+            text-align: center;
+            padding: 20px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="toolbar">
+        <button class="back-btn" onclick="window.location.href='index.html'">
+            <i class="fas fa-arrow-left"></i> Назад
+        </button>
+        <button class="create-btn" onclick="window.location.href='scenario-builder.html'">
+            <i class="fas fa-plus"></i> Создать сценарий
+        </button>
+    </div>
+
+    <div class="scenarios-list">
+        <!-- Сценарии будут добавлены через JavaScript -->
+    </div>
+
+    <script src="scripts/scripts.js"></script>
+</body>
+</html> 

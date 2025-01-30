@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Конструктор сценариев</title>
+    <link rel="stylesheet" href="styles/scenario-builder.css">
+    <link rel="stylesheet" href="styles/action-modal.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: #1a1a1a;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .scenario-builder {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .back-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-btn:hover {
+            background: #444;
+        }
+
+        .scenario-name-input {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            background: #242424;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #ff4d00;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #cc3d00;
+            transform: translateY(-2px);
+        }
+
+        #scenarioCanvas {
+            position: relative;
+            min-height: 400px;
+            border: 2px dashed #ff4d00;
+            border-radius: 8px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #1a1a1a;
+        }
+
+        .action-node {
+            position: absolute;
+            background: #242424;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            padding: 10px;
+            min-width: 200px;
+            cursor: move;
+            z-index: 2;
+        }
+
+        .connection-line {
+            position: absolute;
+            height: 0 !important;
+            transform-origin: left center;
+            pointer-events: none;
+            z-index: 1;
+            border-top-style: dashed !important;
+            border-top-width: 2px !important;
+        }
+
+        .connection-reply {
+            border-top-color: #4d9fff !important;
+        }
+
+        .connection-reaction {
+            border-top-color: #ff4d00 !important;
+        }
+
+        .connection-point {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ff4d00;
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .connection-point.input {
+            left: -6px;
+            top: 50%;
+        }
+
+        .connection-point.output {
+            right: -6px;
+            top: 50%;
+        }
+
+        .delete-action-btn {
+            background: none;
+            border: none;
+            color: #ff4d00;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 0;
+            margin: 0;
+        }
+
+        .delete-action-btn:hover {
+            color: #cc3d00;
+            transform: none;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: #242424;
+            border: 2px solid #ff4d00;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .close {
+            color: #ff4d00;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ff4d00;
+            border-radius: 4px;
+            background: #1a1a1a;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="scenario-builder">
+        <div class="toolbar">
+            <button class="back-btn" onclick="window.location.href='scripts.html'">
+                <i class="fas fa-arrow-left"></i> Назад
+            </button>
+            <input type="text" class="scenario-name-input" placeholder="Название сценария">
+            <button id="addActionBtn">Добавить действие</button>
+            <button id="saveScenario">Сохранить сценарий</button>
+        </div>
+        <div id="scenarioCanvas"></div>
+    </div>
+
+    <!-- Модальное окно для действий -->
+    <div id="actionSettingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Добавление действия</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <!-- Базовые поля -->
+                <div class="form-group">
+                    <label>Тип действия</label>
+                    <select id="actionType">
+                        <option value="message">Сообщение</option>
+                        <option value="media">Медиа</option>
+                        <option value="media_message">Медиа + Сообщение</option>
+                        <option value="reaction">Реакция</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Аккаунт</label>
+                    <input type="text" id="accountName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Задержка (сек)</label>
+                    <input type="number" id="timeDelay" min="0" value="0">
+                </div>
+
+                <!-- Динамические секции -->
+                <div id="dynamicFields"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="saveActionBtn">Сохранить действие</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/action-modal.js"></script>
+    <script src="scripts/action-settings-modal.js"></script>
+    <script src="scripts/scenario-builder.js"></script>
+</body>
+</html>
